@@ -265,7 +265,6 @@ export default function Home() {
               aria-label={`${photo.caption} fotoğrafını büyüt`}
             >
               <img src={photo.src} alt={`Birlikte çekilmiş anı fotoğrafı ${index + 1}`} loading={index < 2 ? 'eager' : 'lazy'} />
-              <span><b>{String(index + 1).padStart(2, '0')}</b><i>↗</i></span>
             </button>
           ))}
         </div>
@@ -275,7 +274,6 @@ export default function Home() {
             return (
               <button key={photo.src} onClick={() => setSelectedPhoto(index)} aria-label={`${photo.caption} fotoğrafını büyüt`}>
                 <img src={photo.src} alt={`Birlikte çekilmiş anı fotoğrafı ${index + 1}`} loading="lazy" />
-                <span>{String(index + 1).padStart(2, '0')}</span>
               </button>
             );
           })}
@@ -355,7 +353,6 @@ export default function Home() {
           <button className="lightbox-arrow lightbox-prev" onClick={() => setSelectedPhoto((selectedPhoto - 1 + photos.length) % photos.length)} aria-label="Önceki fotoğraf">←</button>
           <figure>
             <img src={photos[selectedPhoto].src} alt={`Birlikte çekilmiş anı fotoğrafı ${selectedPhoto + 1}`} />
-            <figcaption><span>{String(selectedPhoto + 1).padStart(2, '0')} / {photos.length}</span></figcaption>
           </figure>
           <button className="lightbox-arrow lightbox-next" onClick={() => setSelectedPhoto((selectedPhoto + 1) % photos.length)} aria-label="Sonraki fotoğraf">→</button>
         </dialog>
