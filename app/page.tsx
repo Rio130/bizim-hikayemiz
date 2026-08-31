@@ -42,8 +42,8 @@ const PHOTO_DEFINITIONS = [
   { file: 'photo-16.enc', caption: 'Hikâyenin devamına doğru' },
 ];
 
-const PHOTO_SALT = 'qAAn8HBxCTgZo32Y8PmH8w==';
-const PHOTO_VERSION = '2';
+const PHOTO_SALT = 'XXylx8SVTe6CSLulqJufcA==';
+const PHOTO_VERSION = '3';
 
 function decodeBase64(value: string) {
   return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
