@@ -33,15 +33,15 @@
 :root {
   --font-sans: 'Manrope';
   --font-serif: 'Cormorant Garamond';
-  --wine: #491522;
-  --wine-2: #641e31;
-  --rose: #d96d7f;
-  --blush: #efc8ca;
-  --cream: #f7f0e9;
-  --paper: #fffaf5;
-  --ink: #281a1c;
-  --muted: #766467;
-  --line: rgba(73, 21, 34, .16);
+  --wine: #17233f;
+  --wine-2: #263b68;
+  --rose: #ff7f66;
+  --blush: #bde8df;
+  --cream: #eef4f3;
+  --paper: #fbfffe;
+  --ink: #17233f;
+  --muted: #607080;
+  --line: rgba(23, 35, 63, .16);
 }
 
 * { box-sizing: border-box; }

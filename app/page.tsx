@@ -101,23 +101,14 @@ async function decryptPhotos(password: string, onFirstBatch?: (urls: string[]) =
   return urls;
 }
 
-function dayDifference(date: string) {
-  if (!date) return null;
-  const start = new Date(`${date}T12:00:00`).getTime();
-  if (Number.isNaN(start)) return null;
-  return Math.max(0, Math.floor((Date.now() - start) / 86_400_000));
-}
-
 export default function Home() {
   const [photoUrls, setPhotoUrls] = useState<string[] | null>(null);
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [unlocking, setUnlocking] = useState(false);
   const [unlockError, setUnlockError] = useState('');
-  const [firstName, setFirstName] = useState('Sen');
-  const [secondName, setSecondName] = useState('O');
-  const [startDate, setStartDate] = useState('');
-  const [customizing, setCustomizing] = useState(true);
+  const [firstName] = useState('Mert Can');
+  const [secondName] = useState('Nazlı');
   const [noteIndex, setNoteIndex] = useState(0);
   const [ideaIndex, setIdeaIndex] = useState(0);
   const [memoryOpen, setMemoryOpen] = useState(false);
@@ -131,7 +122,7 @@ export default function Home() {
     { id: 3, date: '03', title: 'Biz olduğumuz gün', note: 'İki ayrı yol, aynı yöne dönmeye başladı.' },
   ]);
 
-  const daysTogether = useMemo(() => dayDifference(startDate), [startDate]);
+  const daysTogether: number | null = null;
   const photos = useMemo(() => photoUrls?.map((src, index) => ({ ...PHOTO_DEFINITIONS[index], src })) ?? [], [photoUrls]);
   const displayFirst = firstName.trim() || 'Sen';
   const displaySecond = secondName.trim() || 'O';
@@ -168,11 +159,6 @@ export default function Home() {
     } finally {
       setUnlocking(false);
     }
-  }
-
-  function prepareStory(event: SyntheticEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setCustomizing(false);
   }
 
   function addMemory(event: SyntheticEvent<HTMLFormElement>) {
@@ -233,7 +219,6 @@ export default function Home() {
           <a href="#nedenler">Neden sen?</a>
           <a href="#bugun">Bugün</a>
         </div>
-        <button onClick={() => setCustomizing((value) => !value)}><span>✦</span> BİZİ DÜZENLE</button>
       </nav>
 
       <section className="hero" id="top">
@@ -252,23 +237,10 @@ export default function Home() {
         <div className="counter-card">
           <span>BİRLİKTE GEÇEN</span>
           <strong>{daysTogether === null ? '∞' : daysTogether.toLocaleString('tr-TR')}</strong>
-          <p>{daysTogether === null ? 'Başlangıç tarihini ekleyin' : 'güzel gün'}</p>
+          <p>{daysTogether === null ? 'her gün birlikte' : 'güzel gün'}</p>
           <div><i /><span>ve daha niceleri…</span></div>
         </div>
 
-        {customizing && (
-          <form className="customizer" onSubmit={prepareStory}>
-            <header><div><span>KİŞİSELLEŞTİR</span><h2>Bu hikâye sizin.</h2></div><button type="button" onClick={() => setCustomizing(false)} aria-label="Düzenleme panelini kapat">×</button></header>
-            <div className="name-fields">
-              <label>İLK İSİM<input value={firstName} onChange={(event) => setFirstName(event.target.value)} maxLength={24} placeholder="Senin adın" /></label>
-              <span>&</span>
-              <label>İKİNCİ İSİM<input value={secondName} onChange={(event) => setSecondName(event.target.value)} maxLength={24} placeholder="Onun adı" /></label>
-            </div>
-            <label>HİKÂYENİZİN BAŞLADIĞI TARİH<input type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} /></label>
-            <small>Bilgiler yalnızca bu açık sayfada tutulur; hiçbir sunucuya gönderilmez.</small>
-            <button className="save-story" type="submit">HİKÂYEYİ HAZIRLA <span>→</span></button>
-          </form>
-        )}
       </section>
 
       <section className="marquee" aria-label="Sevgi mesajı">
