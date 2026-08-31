@@ -122,7 +122,6 @@ export default function Home() {
     { id: 3, date: '03', title: 'Biz olduğumuz gün', note: 'İki ayrı yol, aynı yöne dönmeye başladı.' },
   ]);
 
-  const daysTogether: number | null = null;
   const photos = useMemo(() => photoUrls?.map((src, index) => ({ ...PHOTO_DEFINITIONS[index], src })) ?? [], [photoUrls]);
   const displayFirst = firstName.trim() || 'Sen';
   const displaySecond = secondName.trim() || 'O';
@@ -236,8 +235,8 @@ export default function Home() {
 
         <div className="counter-card">
           <span>BİRLİKTE GEÇEN</span>
-          <strong>{daysTogether === null ? '∞' : daysTogether.toLocaleString('tr-TR')}</strong>
-          <p>{daysTogether === null ? 'her gün birlikte' : 'güzel gün'}</p>
+          <strong>∞</strong>
+          <p>her gün birlikte</p>
           <div><i /><span>ve daha niceleri…</span></div>
         </div>
 
