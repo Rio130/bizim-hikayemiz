@@ -59,6 +59,11 @@ const PHOTO_DEFINITIONS = [
   { file: 'photo-33.enc', caption: 'Yolumuz hep yan yana' },
   { file: 'photo-34.enc', caption: 'İyi ki buradayız' },
   { file: 'photo-35.enc', caption: 'Devamı gelecek' },
+  { file: 'photo-36.enc', caption: 'Birlikte geçen güzel bir an' },
+  { file: 'photo-37.enc', caption: 'Gülüşümüzün en güzel hâli' },
+  { file: 'photo-38.enc', caption: 'Hikâyemizin renkli sayfası' },
+  { file: 'photo-39.enc', caption: 'İyi ki aynı karedeyiz' },
+  { file: 'photo-40.enc', caption: 'Bu anı da sakladık' },
 ];
 
 const PHOTO_SALT = 'AJdTMsTvxBtDMJ+uNM1ZSA==';
@@ -249,7 +254,7 @@ export default function Home() {
       <section className="photo-story section-wrap" id="fotograflar">
         <header className="section-title">
           <div><span>01 / BİZDEN KARELER</span><h2>En sevdiğimiz<br /><em>anların içinden.</em></h2></div>
-          <p>35 kare · tek hikâye.</p>
+          <p>40 kare · tek hikâye.</p>
         </header>
         <div className="photo-grid">
           {photos.slice(0, 6).map((photo, index) => (
