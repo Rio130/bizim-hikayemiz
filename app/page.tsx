@@ -350,7 +350,7 @@ export default function Home() {
       )}
 
       {selectedPhoto !== null && (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici">
+        <dialog open className="lightbox" aria-label="Fotoğraf görüntüleyici">
           <button className="lightbox-close" onClick={() => setSelectedPhoto(null)} aria-label="Fotoğrafı kapat">×</button>
           <button className="lightbox-arrow lightbox-prev" onClick={() => setSelectedPhoto((selectedPhoto - 1 + photos.length) % photos.length)} aria-label="Önceki fotoğraf">←</button>
           <figure>
@@ -358,7 +358,7 @@ export default function Home() {
             <figcaption><span>{String(selectedPhoto + 1).padStart(2, '0')} / {photos.length}</span></figcaption>
           </figure>
           <button className="lightbox-arrow lightbox-next" onClick={() => setSelectedPhoto((selectedPhoto + 1) % photos.length)} aria-label="Sonraki fotoğraf">→</button>
-        </div>
+        </dialog>
       )}
     </main>
   );
