@@ -40,10 +40,29 @@ const PHOTO_DEFINITIONS = [
   { file: 'photo-14.enc', caption: 'Adımlarımız aynı ritimde' },
   { file: 'photo-15.enc', caption: 'Bu şehirde en sevdiğim kişi' },
   { file: 'photo-16.enc', caption: 'Hikâyenin devamına doğru' },
+  { file: 'photo-17.enc', caption: 'Gülüşünü yakaladığım an' },
+  { file: 'photo-18.enc', caption: 'Günün en güzel tesadüfü' },
+  { file: 'photo-19.enc', caption: 'Birlikte keşfederken' },
+  { file: 'photo-20.enc', caption: 'İki kişilik küçük bir dünya' },
+  { file: 'photo-21.enc', caption: 'Kahkahaya karışan bir akşam' },
+  { file: 'photo-22.enc', caption: 'Bir bakışın yettiği yer' },
+  { file: 'photo-23.enc', caption: 'Sokaklarda kaybolurken' },
+  { file: 'photo-24.enc', caption: 'Şehrin ışıkları altında' },
+  { file: 'photo-25.enc', caption: 'En sevdiğim ekip arkadaşı' },
+  { file: 'photo-26.enc', caption: 'Bir gün daha, yine biz' },
+  { file: 'photo-27.enc', caption: 'Güzel bir anı daha' },
+  { file: 'photo-28.enc', caption: 'Aynı karede iyi ki' },
+  { file: 'photo-29.enc', caption: 'Dışarıda geçen uzun bir gün' },
+  { file: 'photo-30.enc', caption: 'Birlikte daha güzel' },
+  { file: 'photo-31.enc', caption: 'Hikâyemizden bir sayfa' },
+  { file: 'photo-32.enc', caption: 'Bugünün küçük mutluluğu' },
+  { file: 'photo-33.enc', caption: 'Yolumuz hep yan yana' },
+  { file: 'photo-34.enc', caption: 'İyi ki buradayız' },
+  { file: 'photo-35.enc', caption: 'Devamı gelecek' },
 ];
 
-const PHOTO_SALT = 'XXylx8SVTe6CSLulqJufcA==';
-const PHOTO_VERSION = '3';
+const PHOTO_SALT = 'AJdTMsTvxBtDMJ+uNM1ZSA==';
+const PHOTO_VERSION = '4';
 
 function decodeBase64(value: string) {
   return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
@@ -182,7 +201,7 @@ export default function Home() {
           <div className="vault-mark">∞</div>
           <span className="vault-eyebrow">YALNIZCA İKİ KİŞİLİK</span>
           <h1>Bizim<br /><em>Hikâyemiz.</em></h1>
-          <p>Bu sayfadaki fotoğraflar uçtan uca şifrelidir. Hikâyeyi açmak için ikinizin bildiği özel parolayı yazın.</p>
+          <p>Şifreli anılarınız burada. İkinizin bildiği parolayı yazıp hikâyenizi açın.</p>
           <form onSubmit={unlockStory}>
             <label htmlFor="story-password">ÖZEL PAROLA</label>
             <div className="vault-input">
@@ -201,6 +220,7 @@ export default function Home() {
             <button className="vault-submit" type="submit" disabled={unlocking}>{unlocking ? 'HİKÂYE AÇILIYOR…' : 'HİKÂYEYİ AÇ'} <span>→</span></button>
           </form>
           <small><span>●</span> Ham fotoğraflar internete yüklenmez; yalnızca doğru parola tarayıcınızda çözebilir.</small>
+          <p className="vault-copyright">Mert Can KESKİN — Tüm hakları saklıdır.</p>
         </section>
         <aside className="vault-seal"><span>PRIVATE</span><strong>02</strong><i>KİŞİ</i></aside>
       </main>
@@ -262,7 +282,7 @@ export default function Home() {
       <section className="photo-story section-wrap" id="fotograflar">
         <header className="section-title">
           <div><span>01 / BİZDEN KARELER</span><h2>En sevdiğimiz<br /><em>anların içinden.</em></h2></div>
-          <p>Her karenin içinde küçük bir tarih, büyük bir his ve yalnızca bize ait bir ayrıntı var.</p>
+          <p>35 kare · tek hikâye.</p>
         </header>
         <div className="photo-grid">
           {photos.slice(0, 6).map((photo, index) => (
@@ -306,13 +326,13 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <p className="session-note">Eklediğiniz anılar bu ziyaret boyunca görünür; sayfayı yenilediğinizde sıfırlanır.</p>
+        <p className="session-note">Yeni anılar yalnızca bu cihazda görünür.</p>
       </section>
 
       <section className="reasons section-wrap" id="nedenler">
         <header className="section-title">
           <div><span>03 / SENDE SEVDİĞİM</span><h2>Tek bir neden değil,<br /><em>binlerce küçük şey.</em></h2></div>
-          <p>Bazen büyük cümlelere gerek yok. Bir bakış, bir kahkaha, bir “yanındayım” yeter.</p>
+          <p>Bize iyi gelen küçük şeyler.</p>
         </header>
         <div className="reason-grid">
           <article className="reason-feature"><span>01</span><div className="heart-outline">♡</div><h3>Yanında kendim olabildiğim için.</h3></article>
@@ -339,7 +359,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div><span>∞</span><strong>{displayFirst} & {displaySecond}</strong></div>
-        <p>İyi ki aynı hikâyedeyiz.</p>
+        <p>© 2026 Mert Can KESKİN — Tüm hakları saklıdır.</p>
         <a href="#top">YUKARI DÖN ↑</a>
       </footer>
 
