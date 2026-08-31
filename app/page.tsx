@@ -42,7 +42,7 @@ const PHOTO_DEFINITIONS = [
   { file: 'photo-16.enc', caption: 'Hikâyenin devamına doğru' },
 ];
 
-const PHOTO_SALT = 'vy97urDkonCt+Q6aaQXOkw==';
+const PHOTO_SALT = 'qAAn8HBxCTgZo32Y8PmH8w==';
 
 function decodeBase64(value: string) {
   return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
