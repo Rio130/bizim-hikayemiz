@@ -1,6 +1,7 @@
 'use client';
 
 import { SyntheticEvent, useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 type Memory = {
   id: number;
@@ -347,7 +348,7 @@ export default function Home() {
         </dialog>
       )}
 
-      {selectedPhoto !== null && (
+      {selectedPhoto !== null && createPortal(
         <dialog open className="lightbox" aria-label="Fotoğraf görüntüleyici">
           <button className="lightbox-close" onClick={() => setSelectedPhoto(null)} aria-label="Fotoğrafı kapat">×</button>
           <button className="lightbox-arrow lightbox-prev" onClick={() => setSelectedPhoto((selectedPhoto - 1 + photos.length) % photos.length)} aria-label="Önceki fotoğraf">←</button>
@@ -355,7 +356,8 @@ export default function Home() {
             <img src={photos[selectedPhoto].src} alt={`Birlikte çekilmiş anı fotoğrafı ${selectedPhoto + 1}`} />
           </figure>
           <button className="lightbox-arrow lightbox-next" onClick={() => setSelectedPhoto((selectedPhoto + 1) % photos.length)} aria-label="Sonraki fotoğraf">→</button>
-        </dialog>
+        </dialog>,
+        document.body,
       )}
     </main>
   );

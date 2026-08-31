@@ -51,7 +51,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; pointer-even
 button, input, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
-main { overflow: hidden; animation: page-in .8s ease both; }
+main { overflow: hidden; animation: page-in .8s ease; }
 .page-loader { min-height: 100vh; display: grid; place-items: center; background: var(--cream); color: var(--wine); }
 
 .vault-shell { min-height: 100vh; display: grid; place-items: center; position: relative; padding: 42px 22px; background: linear-gradient(135deg, rgba(255,250,245,.76), rgba(247,240,233,.98)); isolation: isolate; overflow: hidden; }
