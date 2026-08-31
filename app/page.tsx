@@ -68,7 +68,7 @@ function decodeBase64(value: string) {
   return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
 }
 
-async function decryptPhotos(password: string) {
+async function decryptPhotos(password: string, onFirstBatch?: (urls: string[]) => void) {
   const passwordMaterial = await crypto.subtle.importKey(
     'raw',
     new TextEncoder().encode(password),
@@ -85,20 +85,20 @@ async function decryptPhotos(password: string) {
   );
 
   const baseUrl = import.meta.env.BASE_URL;
-  const encryptedFiles = await Promise.all(PHOTO_DEFINITIONS.map(async ({ file }) => {
-    const response = await fetch(`${baseUrl}photos/${file}?v=${PHOTO_VERSION}`, { cache: 'force-cache' });
-    if (!response.ok) throw new Error('Fotoğraf paketi yüklenemedi.');
-    return response.arrayBuffer();
-  }));
-
-  const decrypted = await Promise.all(encryptedFiles.map(async (file) => {
-    const packed = new Uint8Array(file);
-    const nonce = packed.slice(0, 12);
-    const ciphertextWithTag = packed.slice(12);
-    return crypto.subtle.decrypt({ name: 'AES-GCM', iv: nonce }, key, ciphertextWithTag);
-  }));
-
-  return decrypted.map((photo) => URL.createObjectURL(new Blob([photo], { type: 'image/jpeg' })));
+  const urls: string[] = [];
+  for (let start = 0; start < PHOTO_DEFINITIONS.length; start += 6) {
+    const batch = PHOTO_DEFINITIONS.slice(start, start + 6);
+    const decrypted = await Promise.all(batch.map(async ({ file }) => {
+      const response = await fetch(`${baseUrl}photos/${file}?v=${PHOTO_VERSION}`, { cache: 'force-cache' });
+      if (!response.ok) throw new Error('Fotoğraf paketi yüklenemedi.');
+      const packed = new Uint8Array(await response.arrayBuffer());
+      const nonce = packed.slice(0, 12);
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: nonce }, key, packed.slice(12));
+    }));
+    urls.push(...decrypted.map((photo) => URL.createObjectURL(new Blob([photo], { type: 'image/jpeg' }))));
+    if (start === 0) onFirstBatch?.([...urls]);
+  }
+  return urls;
 }
 
 function dayDifference(date: string) {
@@ -136,10 +136,6 @@ export default function Home() {
   const displayFirst = firstName.trim() || 'Sen';
   const displaySecond = secondName.trim() || 'O';
 
-  useEffect(() => () => {
-    photoUrls?.forEach((url) => URL.revokeObjectURL(url));
-  }, [photoUrls]);
-
   useEffect(() => {
     if (selectedPhoto === null) return;
 
@@ -164,7 +160,7 @@ export default function Home() {
     setUnlocking(true);
     setUnlockError('');
     try {
-      const urls = await decryptPhotos(password);
+      const urls = await decryptPhotos(password, (firstBatch) => setPhotoUrls(firstBatch));
       setPhotoUrls(urls);
       setPassword('');
     } catch {
