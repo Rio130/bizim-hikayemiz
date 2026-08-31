@@ -265,7 +265,7 @@ export default function Home() {
               aria-label={`${photo.caption} fotoğrafını büyüt`}
             >
               <img src={photo.src} alt={`Birlikte çekilmiş anı fotoğrafı ${index + 1}`} loading={index < 2 ? 'eager' : 'lazy'} />
-              <span><b>{String(index + 1).padStart(2, '0')}</b><em>{photo.caption}</em><i>↗</i></span>
+              <span><b>{String(index + 1).padStart(2, '0')}</b>{index < 5 && <em>{photo.caption}</em>}<i>↗</i></span>
             </button>
           ))}
         </div>
