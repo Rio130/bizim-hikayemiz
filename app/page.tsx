@@ -43,6 +43,7 @@ const PHOTO_DEFINITIONS = [
 ];
 
 const PHOTO_SALT = 'qAAn8HBxCTgZo32Y8PmH8w==';
+const PHOTO_VERSION = '2';
 
 function decodeBase64(value: string) {
   return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
@@ -66,7 +67,7 @@ async function decryptPhotos(password: string) {
 
   const baseUrl = import.meta.env.BASE_URL;
   const encryptedFiles = await Promise.all(PHOTO_DEFINITIONS.map(async ({ file }) => {
-    const response = await fetch(`${baseUrl}photos/${file}`, { cache: 'force-cache' });
+    const response = await fetch(`${baseUrl}photos/${file}?v=${PHOTO_VERSION}`, { cache: 'force-cache' });
     if (!response.ok) throw new Error('Fotoğraf paketi yüklenemedi.');
     return response.arrayBuffer();
   }));
